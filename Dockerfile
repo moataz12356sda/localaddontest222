@@ -9,16 +9,10 @@ CMD [ "/run.sh" ]
 
 FROM python:3.9
 
-
-
-COPY config /config
-
 ADD main.py .
-
 
 RUN pip install paho-mqtt 
 RUN pip install influxdb
-RUN pip install PyCRC-Hex
-
 
 CMD ["python3" , "./main.py"]
+
