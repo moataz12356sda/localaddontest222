@@ -1,7 +1,7 @@
 {
-  "name": "newlocaladdon22",
+  "name": "newlocaladdon222",
   "version": "1.0",
-  "slug": "newlocaladdon22",
+  "slug": "newlocaladdon222",
   "description": "localdatabase v2 gateway on local database home assistant",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
   "startup": "application",
@@ -34,5 +34,6 @@
   "host_network" : true ,
   "hassio_api": true
 }
+
 
 
