@@ -26,7 +26,7 @@ USERNAME_DATABASE = "skarpt"
 PASSWORD_DATABASE = "skarpt"
 DATABASE_IP = '192.168.1.100'
 DATABASE_PORT = "8086"
-sensorlist = ['62211587', '62211586' ,'62211589', '62211588', '62211590', '62211595', '62211598' , '62211601', '62211602' , '62211603','62212254','62212260','62212255','62212259']
+sensorlist = ['62211587', '62211586' ,'62211589', '62211588', '62211590', '62211595', '62211598' , '62211601', '62211602' , '62211603','62212254','62212260','62212255','62212259',"06240839","06240831","06240834","06240835","06240836","06240826"]
 def ConvertKSA (packet) :
     hour = packet[46:48]
     print(int(hour, 16))
@@ -279,7 +279,7 @@ def SendToInternalDataBase (dectionarylist):
             if float(i["temperature"]) < -2 : 
                 return 0
             if str(i["Sensorid"]) in sensorlist : 
-                pass
+                print("Unknown sensor:", i["Sensorid"])
             else :
                 return 0  
             DataPoint = BuildJsonDataBase(i["Date"],i["Time"],i["temperature"],i["humidity"],i["SensorBattary"],i["GatewayId"],i["Sensorid"])
