@@ -146,7 +146,7 @@ def TempFun ( temp) :
     if str (normalbit) == '0' :
         pass
     else:
-        return "Sensor error"
+        return "255"
 
     if str (postitive) == '0':
         sign = '+'
@@ -169,7 +169,7 @@ def HumFun ( hum) :
     if str (normalbit) == '0':
         pass
     else:
-        return "Sensor error"
+        return "255"
     return str(int(value, 2))
 def ConvertPacketIntoElemets (packet) :        
     global glpacket
