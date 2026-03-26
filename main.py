@@ -38,7 +38,7 @@ def ConvertKSA (packet) :
 
 def Checked_SavedHolding_Database():
     client = InfluxDBClient(DATABASE_IP, DATABASE_PORT, USERNAME_DATABASE, PASSWORD_DATABASE, INTERNAL_BACKUP_DATABASE_NAME)
-    result = client.query('SELECT *  FROM "Hold"."autogen"."mostord" ')
+    result = client.query('SELECT *  FROM "Hold"."autogen"."Tzone" ')
     length = len(list(result.get_points()))
     if length != 0 :
         return True
@@ -46,11 +46,11 @@ def Checked_SavedHolding_Database():
         return False
 def Send_Saved_Database ():
     client = InfluxDBClient(DATABASE_IP, DATABASE_PORT, USERNAME_DATABASE, PASSWORD_DATABASE, INTERNAL_BACKUP_DATABASE_NAME)
-    result = client.query('SELECT *  FROM "Hold"."autogen"."mostord" ')
+    result = client.query('SELECT *  FROM "Hold"."autogen"."Tzone" ')
     data = list(result.get_points())
     for point in data :
         SendPacketToServer(str(point["Packet"]))
-        client.delete_series(database="Hold", measurement="mostord", tags={"id":point["id"]})
+        client.delete_series(database="Hold", measurement="Tzone", tags={"id":point["id"]})
 def Save_IndexNum(index) :
     textfile = open("IndexNum.txt", "w")
     textfile.write(str (index))
@@ -73,7 +73,7 @@ def SendPacketHoldingDataBase(packet) :
 
     DataPoint = [
         {
-            "measurement": "mostord",
+            "measurement": "Tzone",
             "tags" : {
                 "id": index
             },
@@ -92,7 +92,7 @@ def SendPacketToServer (packet) :
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((Serverip, Serverport))
             s.send(binascii.unhexlify(packet))
-            print('sent to server')
+            print('sent to server sucess')
         except:
             print("server " + Serverip + "error")
 def TestServerConnection () : #return network status
@@ -290,6 +290,7 @@ def SendToInternalDataBase (dectionarylist):
         if Checked_SavedHolding_Database() :
             threading.Thread(target=Send_Saved_Database, args=[]).start()
         SendPacketToServer(packet)
+        print("sent sucess")
     else:
         SendPacketHoldingDataBase(packet)
     
