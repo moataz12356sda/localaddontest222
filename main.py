@@ -274,7 +274,7 @@ def SendToInternalDataBase (dectionarylist):
     client = InfluxDBClient(DATABASE_IP, DATABASE_PORT , USERNAME_DATABASE, PASSWORD_DATABASE, INTERNAL_DATABASE_NAME)
     try :
         for i in dectionarylist :
-            if float(i["temperature"]) > 60 : 
+            if float(i["temperature"]) > 50 : 
                 return 0 
             if float(i["temperature"]) < -2 : 
                 return 0
